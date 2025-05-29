@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía SPA: Revive Skin - Tendencias y Estrategia de Mercado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7FAFC; /* Very Light Gray */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 380px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .section-title { color: #073B4C; } /* Midnight Blue/Dark Teal */
+        .card-bg { background-color: #FFFFFF; } /* White */
+        .text-main { color: #073B4C; } /* Midnight Blue/Dark Teal */
+        .text-accent { color: #118AB2; } /* Cerulean Blue */
+        .bg-accent-light { background-color: #E0F7FA; } /* Very Light Cyan/Blue */
+        .highlight-stat { font-size: 2.8rem; font-weight: 700; color: #06D6A0; } /* Turquoise Green */
+        .kpi-card { background-color: #073B4C; color: #FFFFFF; padding: 1.5rem; border-radius: 0.5rem; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+        .kpi-value { font-size: 2.2rem; font-weight: 700; color: #FFD166; display: block; margin-bottom: 0.5rem; } /* Sunny Yellow */
+        .kpi-label { font-size: 0.9rem; color: #E0F7FA; }
+        .flow-chart-step { background-color: #118AB2; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-align: center; margin-bottom: 0.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .flow-chart-arrow { font-size: 1.5rem; color: #073B4C; margin: 0.25rem 0; text-align: center; }
+        .product-icon { font-size: 1.5rem; margin-right: 0.5rem; color: #118AB2;} /* Ajustado tamaño de icono */
+
+        /* Chosen Palette: Energetic & Playful (Adapted) */
+        /* Application Structure Plan: 
+            1. Header: Infographic Title
+            2. Section 1: Market Overview (General natural cosmetics trend, growth stats)
+            3. Section 2: Introducing "Revive Skin" (Logo, Slogan, Mission, Vision, Values)
+            4. Section 3: Target Audience (Demographics - age donut chart, Key Purchase Drivers - bar chart)
+            5. Section 4: Our Star Products (List of products with icons)
+            6. Section 5: SWOT Analysis (Strengths, Weaknesses, Opportunities, Threats in a grid)
+            7. Section 6: Marketing & Distribution (Marketing channels effectiveness - bar chart, Distribution flow - HTML/CSS diagram)
+            8. Section 7: Financials & Projections (Key costs, Pricing example, Sales projection - line chart)
+            9. Section 8: Expected Outcomes (Key results expected beyond financials)
+            10. Section 9: Conclusion & Call to Action
+            11. Footer: Copyright
+            This structure provides a logical flow from general market to specific company details and future outlook, enhancing user understanding.
+        */
+        /* Visualization & Content Choices:
+            - Market Growth (KPI): Single Big Number (HTML/CSS). Goal: Inform. Data: Estimated 7.5% growth. Justification: Quick impact. (No SVG)
+            - Consumer Preference (KPI): Single Big Number (HTML/CSS). Goal: Inform. Data: Estimated 72% prefer natural. Justification: Highlights demand. (No SVG)
+            - Target Age Distribution: Donut Chart (Chart.js Canvas). Goal: Compare. Data: 20-55 age range breakdown. Justification: Visualizes segments. (No SVG)
+            - Purchase Drivers: Bar Chart (Chart.js Canvas). Goal: Compare. Data: Factors like natural ingredients, effectiveness. Justification: Shows priorities. (No SVG)
+            - Product List: HTML list with Unicode icons. Goal: Inform. Data: Product names from report. Justification: Clear product overview. (No SVG)
+            - SWOT Analysis: HTML/CSS grid. Goal: Organize. Data: Points from report. Justification: Structured strategic view. (No SVG)
+            - Marketing Channels: Bar Chart (Chart.js Canvas). Goal: Compare. Data: Effectiveness of channels. Justification: Guides strategy. (No SVG)
+            - Distribution Flow: HTML/CSS diagram. Goal: Organize. Data: Channels from report. Justification: Visualizes process. (No SVG, No Mermaid JS)
+            - Sales Projection: Line Chart (Chart.js Canvas). Goal: Change. Data: 1000 units/year, 100% annual growth. Justification: Shows future potential. (No SVG)
+            - Cost Breakdown for "Exfoliante de Miel, Café y Azúcar con aceite (16 oz)": Pie Chart (Chart.js Canvas). Goal: Compare. Data: Materia prima, Margen. Justification: Illustrates price composition. (No SVG)
+        */
+        /* CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. */
+    </style>
+</head>
+<body class="text-main">
+
+    <header class="bg-accent-light py-8 text-center shadow-md">
+        <h1 class="text-4xl font-bold section-title">Infografía Interactiva: Revive Skin</h1>
+        <p class="text-xl text-accent mt-2">Tendencias del Mercado y Estrategia Empresarial</p>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <section id="panorama-mercado" class="mb-12 p-6 rounded-lg card-bg shadow-lg">
+            <h2 class="text-3xl font-semibold section-title mb-4 text-center">1. El Auge de la Cosmética Natural</h2>
+            <p class="text-lg mb-6 text-center">
+                La industria cosmética global está experimentando una transformación hacia lo natural y sostenible. Los consumidores, cada vez más informados, buscan productos con ingredientes transparentes y beneficios genuinos, creando un mercado en expansión para empresas auténticas como "Revive Skin".
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <div class="kpi-card">
+                    <span class="kpi-value">~70%</span>
+                    <span class="kpi-label">de consumidores prefieren ingredientes naturales en cosméticos.</span>
+                </div>
+                <div class="text-center">
+                    <p class="text-lg font-semibold text-accent mb-2">Crecimiento Anual Estimado del Sector Cosmética Natural:</p>
+                    <p class="highlight-stat">~8%</p>
+                    <p class="text-sm text-gray-600">(Fuente: Análisis de Tendencias Globales - Simulado)</p>
+                </div>
+            </div>
+            <p class="text-md mt-6 text-center">
+                Esta tendencia impulsa la demanda de calidad, origen ético de los ingredientes y transparencia por parte de las marcas.
+            </p>
+        </section>
+
+        <section id="sobre-revive-skin" class="mb-12 p-6 rounded-lg card-bg shadow-lg bg-accent-light">
+            <h2 class="text-3xl font-semibold section-title mb-6 text-center">2. Presentando a "Revive Skin"</h2>
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="md:w-1/3 text-center">
+                    <div class="w-48 h-48 mx-auto border-4 border-[#118AB2] rounded-full flex items-center justify-center p-1 bg-white overflow-hidden mb-4 shadow-lg">
+                        <img src="https://drive.google.com/file/d/1b7vUOkps9AGxU5aBE8BYrUxbMGiysK3J/view?usp=sharing">
+                    </div>
+                    <p class="text-lg italic 5text-main">"El logotipo presenta un diseño circular dividido en secciones, cada una conteniendo un elemento que representa los ingredientes clave: un panal de abejas para la miel, granos de café, cubos de azúcar y una hoja verde simbolizando la naturaleza."</p>
+                </div>
+                <div class="md:w-2/3">
+                    <p class="text-2xl font-semibold text-accent mb-3">Lemas:</p>
+                    <ul class="list-disc list-inside mb-4 pl-4">
+                        <li class="italic text-main">'El secreto de una piel suave y luminosa.'</li>
+                        <li class="italic text-main">'Miel, café y azúcar: el trío perfecto para una piel renovada.'</li>
+                    </ul>
+                    <p class="text-lg mb-2"><strong class="text-accent">Misión:</strong> Elaborar y comercializar exfoliantes artesanales de alta calidad, utilizando ingredientes naturales para promover la belleza natural y el bienestar.</p>
+                    <p class="text-lg"><strong class="text-accent">Visión:</strong> Ser reconocidos como marca líder en cuidado de la piel natural, destacando por calidad, innovación y compromiso con la sostenibilidad y comercio justo.</p>
+                </div>
+            </div>
+             <p class="text-lg mt-4"><strong class="text-accent">Valores Fundamentales:</strong> Calidad, Sostenibilidad, Honestidad, Innovación, Bienestar y Comunidad.</p>
+        </section>
+
+        <section id="publico-objetivo" class="mb-12 p-6 rounded-lg card-bg shadow-lg">
+            <h2 class="text-3xl font-semibold section-title mb-6 text-center">3. Nuestro Consumidor Ideal</h2>
+            <p class="text-lg mb-6 text-center">
+                "Revive Skin" se enfoca en mujeres y hombres de 16 a 55 años, preocupados por el cuidado de la piel y que buscan productos naturales, efectivos y artesanales. Valoran la sostenibilidad y la transparencia de las marcas.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-accent mb-3 text-center">Distribución por Edad (Público Objetivo)</h3>
+                    <div class="chart-container">
+                        <canvas id="edadPublicoChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-center">Segmentos clave: jóvenes adultos (interesados en innovación y sostenibilidad) y adultos (valoran eficacia y beneficios antiedad).</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-accent mb-3 text-center">Motivadores de Compra Principales</h3>
+                    <div class="chart-container">
+                        <canvas id="motivadoresCompraChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-center">La naturalidad de los ingredientes, la efectividad percibida y las recomendaciones son cruciales.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="nuestros-productos" class="mb-12 p-6 rounded-lg card-bg shadow-lg bg-accent-light">
+            <h2 class="text-3xl font-semibold section-title mb-6 text-center">4. Gran Línea de Exfoliantes "Revive Skin"</h2>
+            <p class="text-lg mb-6 text-center">
+                Nuestros exfoliantes son elaborados artesanalmente con ingredientes naturales de la más alta calidad, diseñados para revitalizar y nutrir tu piel.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-4 card-bg rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h4 class="text-lg font-semibold text-accent flex items-center"><span class="product-icon">🍯</span>Exfoliante de Miel y Café</h4>
+                    <p class="text-sm">Suave, para todo tipo de piel. Combina exfoliación y profunda hidratación.</p>
+                </div>
+                <div class="p-4 card-bg rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h4 class="text-lg font-semibold text-accent flex items-center"><span class="product-icon">🍬</span>Exfoliante de Miel y Azúcar</h4>
+                    <p class="text-sm">Ideal para pieles sensibles. Nutre mientras exfolia con delicadeza.</p>
+                </div>
+                <div class="p-4 card-bg rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h4 class="text-lg font-semibold text-accent flex items-center"><span class="product-icon">🥥</span>Exfoliante Miel, Café, Azúcar y Coco</h4>
+                    <p class="text-sm">Extra nutritivo e hidratante gracias al aceite de coco.</p>
+                </div>
+                <div class="p-4 card-bg rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h4 class="text-lg font-semibold text-accent flex items-center"><span class="product-icon">🌿</span>Exfoliante con Aceites Esenciales</h4>
+                    <p class="text-sm">Personalizable con lavanda, naranja, etc., para aromaterapia y beneficios específicos.</p>
+                </div>
+                <div class="p-4 card-bg rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h4 class="text-lg font-semibold text-accent flex items-center"><span class="product-icon">✨</span>Exfoliante de Azúcar y Aceite</h4>
+                    <p class="text-sm">Un clásico revitalizante para una exfoliación efectiva y piel radiante.</p>
+                </div>
+                <div class="p-4 card-bg rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h4 class="text-lg font-semibold text-accent flex items-center"><span class="product-icon">🌾</span>Exfoliante de Avena y Aceite</h4>
+                    <p class="text-sm">Perfecto para pieles delicadas, ofrece una exfoliación ultra suave y calmante.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="foda" class="mb-12 p-6 rounded-lg card-bg shadow-lg">
+            <h2 class="text-3xl font-semibold section-title mb-6 text-center">5. Análisis Estratégico FODA</h2>
+            <p class="text-lg mb-6 text-center">
+                Identificamos los factores clave que definen nuestra posición en el mercado y guían nuestras decisiones estratégicas.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="border-2 border-[#06D6A0] p-4 rounded-lg shadow">
+                    <h3 class="text-xl font-bold text-[#06D6A0] mb-2">💪 Fortalezas</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Ingredientes 100% naturales y de alta calidad.</li>
+                        <li>Productos artesanales, fórmulas personalizables.</li>
+                        <li>Compromiso con sostenibilidad y comercio justo.</li>
+                        <li>Potencial de crecimiento tecnológico y de catálogo.</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-[#118AB2] p-4 rounded-lg shadow">
+                    <h3 class="text-xl font-bold text-[#118AB2] mb-2">📈 Oportunidades</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Alta demanda de cosmética natural y consciente.</li>
+                        <li>Expansión a e-commerce y mercados especializados.</li>
+                        <li>Colaboraciones con spas, hoteles boutique, influencers.</li>
+                        <li>Desarrollo de nuevas líneas (mascarillas, bálsamos).</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-[#FFD166] p-4 rounded-lg shadow">
+                    <h3 class="text-xl font-bold text-[#FFD166] mb-2">⚠️ Debilidades</h3>            
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Producción inicial a pequeña escala.</li>
+                        <li>Reconocimiento de marca por construir.</li>
+                        <li>Recursos financieros iniciales limitados.</li>
+                        <li>Dependencia de proveedores locales específicos.</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-[#FF6B6B] p-4 rounded-lg shadow">
+                    <h3 class="text-xl font-bold text-[#FF6B6B] mb-2">🛑 Amenazas</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Competencia intensa de marcas establecidas y emergentes.</li>
+                        <li>Volatilidad en precios de materias primas naturales.</li>
+                        <li>Cambios en normativas cosméticas y de etiquetado.</li>
+                        <li>Sensibilidad del consumidor a la relación calidad-precio.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="estrategias-alcance" class="mb-12 p-6 rounded-lg card-bg shadow-lg bg-accent-light">
+            <h2 class="text-3xl font-semibold section-title mb-6 text-center">6. Conectando con Nuestros Clientes</h2>
+            <p class="text-lg mb-6 text-center">
+                Nuestra estrategia se centra en construir una comunidad sólida a través del marketing digital auténtico, ventas directas y colaboraciones que reflejen nuestros valores.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-accent mb-3 text-center">Canales de Marketing Prioritarios</h3>
+                    <div class="chart-container">
+                        <canvas id="marketingChannelsChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-center">Redes sociales (Instagram, TikTok, Facebook) y tienda online serán fundamentales.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-accent mb-3 text-center">Flujo de Distribución al Cliente</h3>
+                    <div class="space-y-2">
+                        <div class="flow-chart-step">Elaboración Artesanal "Revive Skin"</div>
+                        <div class="flow-chart-arrow">⬇️</div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="flow-chart-step">Tienda Online (Venta Directa)</div>
+                            <div class="flow-chart-step">Redes Sociales (Interacción y Venta)</div>
+                        </div>
+                        <div class="flow-chart-arrow">⬇️</div>
+                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="flow-chart-step">Mercados Artesanales y Ferias</div>
+                            <div class="flow-chart-step">Colaboraciones (Minoristas, Spas)</div>
+                        </div>
+                         <div class="flow-chart-arrow">⬇️</div>
+                        <div class="flow-chart-step">Cliente Feliz y Piel Revitalizada</div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-center">Un modelo diversificado para asegurar accesibilidad y una experiencia de compra personalizada.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="financieros-proyecciones" class="mb-12 p-6 rounded-lg card-bg shadow-lg">
+            <h2 class="text-3xl font-semibold section-title mb-6 text-center">7. Finanzas y Proyecciones de Crecimiento</h2>
+            <p class="text-lg mb-6 text-center">
+                Analizamos nuestra estructura de costos para ofrecer precios justos y proyectamos un crecimiento sostenido basado en la calidad de nuestros productos y estrategias efectivas.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <div>
+                    <h3 class="text-xl font-semibold text-accent mb-3 text-center">Ejemplo de Estructura de Precio (Exfoliante Miel, Café, Azúcar y Aceite - 16oz)</h3>
+                    <div class="chart-container" style="height: 280px; max-height: 300px;">
+                        <canvas id="precioProductoChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-center">Precio de Venta: RD$439.99. Margen de Ganancia: 40%.</p>
+                    <p class="text-xs text-gray-500 mt-1 text-center">(Costos de mano de obra y operativos iniciales asumidos por los estudiantes).</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-accent mb-3 text-center">Proyección de Unidades Vendidas (Primer Año)</h3>
+                    <div class="chart-container" style="height: 280px; max-height: 300px;">
+                        <canvas id="unidadesVendidasChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-center">Objetivo: 1000 unidades en el primer año, con crecimiento anual del 100%.</p>
+                </div>
+            </div>
+             <p class="text-md mt-8 font-semibold text-center text-accent">Ingreso Neto Esperado (Primeros 6 Meses): RD$69,400</p>
+        </section>
+
+        <section id="resultados-esperados" class="mb-12 p-6 rounded-lg card-bg shadow-lg bg-accent-light">
+            <h2 class="text-3xl font-semibold section-title mb-6 text-center">8. Resultados Esperados Clave</h2>
+            <p class="text-lg mb-6 text-center">
+                Más allá de los beneficios económicos, "Revive Skin" busca generar un impacto positivo a través del aprendizaje, el apoyo a la comunidad y la construcción de una marca sólida.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-4 card-bg rounded-lg shadow">
+                    <h4 class="text-lg font-semibold text-accent mb-2">🎓 Aprendizaje y Desarrollo</h4>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Formulación de cosméticos naturales.</li>
+                        <li>Estrategias de marketing digital.</li>
+                        <li>Gestión de inventario y cadena de suministro.</li>
+                    </ul>
+                </div>
+                <div class="p-4 card-bg rounded-lg shadow">
+                    <h4 class="text-lg font-semibold text-accent mb-2">🌱 Impacto Social</h4>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Uso de ingredientes de proveedores locales.</li>
+                        <li>Promoción de prácticas sostenibles.</li>
+                        <li>Fomento del comercio justo.</li>
+                    </ul>
+                </div>
+                <div class="p-4 card-bg rounded-lg shadow">
+                    <h4 class="text-lg font-semibold text-accent mb-2">🌟 Crecimiento de Marca</h4>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Aumento del reconocimiento de marca.</li>
+                        <li>Expansión de la distribución.</li>
+                        <li>Alta retención de clientes (objetivo 50%).</li>
+                        <li>Reputación positiva y menciones.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="py-8 text-center">
+            <h2 class="text-3xl font-semibold section-title mb-4">Conclusión: El Futuro Natural de "Revive Skin"</h2>
+            <p class="text-lg max-w-3xl mx-auto mb-6">
+                "Revive Skin" está posicionada para florecer en el creciente mercado de la cosmética natural. A través de la calidad, la autenticidad artesanal y una conexión genuina con sus clientes, la empresa no solo busca el éxito económico, sino también promover un cuidado de la piel consciente y sostenible. El camino es prometedor.
+            </p>
+            <button class="bg-[#FF6B6B] hover:bg-[#e05252] text-white font-bold py-3 px-8 rounded-lg shadow-md transition duration-300">
+                Descubre la Experiencia Revive Skin
+            </button>
+        </section>
+    </main>
+
+    <footer class="bg-[#073B4C] text-white text-center p-6 mt-12">
+        <p>&copy; 2025 Revive Skin - Infografía de Tendencias del Mercado y Estrategia Empresarial.</p>
+        <p class="text-sm text-gray-300">Datos presentados con fines ilustrativos basados en la plantilla de miniempresa.</p>
+    </footer>
+
+    <script>
+        const tooltipTitleCallback = function(tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: { title: tooltipTitleCallback },
+                    backgroundColor: '#073B4C', titleColor: '#FFD166', bodyColor: '#FFFFFF',
+                    borderColor: '#118AB2', borderWidth: 1, padding: 10,
+                    boxPadding: 3
+                },
+                legend: { labels: { color: '#073B4C', font: { size: 11 } } }
+            },
+            scales: {
+                y: { beginAtZero: true, ticks: { color: '#073B4C', font: {size: 10 } }, grid: { color: '#E0E0E0' } },
+                x: { ticks: { color: '#073B4C', font: {size: 10 } }, grid: { display: false } }
+            }
+        };
+        
+        const processLabels = (labels) => {
+            return labels.map(label => {
+                if (typeof label === 'string' && label.length > 16) {
+                    const words = label.split(' ');
+                    let currentLine = '';
+                    const lines = [];
+                    words.forEach(word => {
+                        if ((currentLine + word).length > 16 && currentLine.length > 0) {
+                            lines.push(currentLine.trim());
+                            currentLine = word + ' ';
+                        } else {
+                            currentLine += word + ' ';
+                        }
+                    });
+                    lines.push(currentLine.trim());
+                    return lines;
+                }
+                return label;
+            });
+        };
+
+        const edadPublicoCtx = document.getElementById('edadPublicoChart').getContext('2d');
+        new Chart(edadPublicoCtx, {
+            type: 'doughnut',
+            data: {
+                labels: processLabels(['16-35 años', '36-45 años', '46-55 años']),
+                datasets: [{
+                    label: 'Distribución por Edad',
+                    data: [47, 35, 18], // Estimación basada en público general
+                    backgroundColor: ['#FF6B6B', '#FFD166', '#06D6A0'],
+                    borderColor: '#FFFFFF', borderWidth: 3
+                }]
+            },
+            options: { ...commonChartOptions, cutout: '60%' }
+        });
+
+        const motivadoresCompraCtx = document.getElementById('motivadoresCompraChart').getContext('2d');
+        new Chart(motivadoresCompraCtx, {
+            type: 'bar',
+            data: {
+                labels: processLabels(['Ingredientes Naturales', 'Efectividad Percibida', 'Precio Justo', 'Sostenibilidad', 'Recomendaciones']),
+                datasets: [{
+                    label: '% Importancia Relativa',
+                    data: [85, 80, 70, 65, 60], // Estimación
+                    backgroundColor: ['#118AB2', '#06D6A0', '#FFD166', '#FF6B6B', '#4DB4D7'],
+                    borderRadius: 5
+                }]
+            },
+            options: commonChartOptions
+        });
+
+        const marketingChannelsCtx = document.getElementById('marketingChannelsChart').getContext('2d');
+        new Chart(marketingChannelsCtx, {
+            type: 'bar',
+            data: {
+                labels: processLabels(['Redes Sociales (Instagram, TikTok)', 'Tienda Online Propia','Publicidad Local', 'Ferias y Mercados','Marketing de Influencers']),
+                datasets: [{
+                    label: 'Prioridad Estratégica (%)', // Cambiado de efectividad percibida
+                    data: [0.9, 0.8, 0.7, 0.6, 0.3], // Estimación
+                    backgroundColor: ['#FF6B6B', '#FFD166', '#06D6A0', '#118AB2', '#073B4C'],
+                    borderRadius: 5
+                }]
+            },
+             options: commonChartOptions
+        });
+        
+        const precioProductoCtx = document.getElementById('precioProductoChart').getContext('2d');
+        new Chart(precioProductoCtx, {
+            type: 'pie',
+            data: {
+                labels: processLabels(['Costo Materia Prima (RD$314.28)', 'Margen de Ganancia (RD$125.71)']),
+                datasets: [{
+                    label: 'Composición del Precio de Venta',
+                    data: [314.28, 125.71],
+                    backgroundColor: ['#118AB2', '#06D6A0'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: { ...commonChartOptions, 
+                plugins: { 
+                    ...commonChartOptions.plugins,
+                    tooltip: {
+                        ...commonChartOptions.plugins.tooltip,
+                        callbacks: {
+                            ...commonChartOptions.plugins.tooltip.callbacks,
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += 'RD$' + context.parsed.toFixed(2);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const unidadesVendidasCtx = document.getElementById('unidadesVendidasChart').getContext('2d');
+        new Chart(unidadesVendidasCtx, {
+            type: 'line',
+            data: {
+                labels: processLabels(['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4']),
+                datasets: [{
+                    label: 'Unidades Vendidas (Acumulado Año 1)',
+                    data: [150, 350, 650, 1000], // Progresión para alcanzar 1000
+                    borderColor: '#FF6B6B',
+                    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                    tension: 0.4, fill: true, pointBackgroundColor: '#FF6B6B', pointRadius: 5
+                }]
+            },
+            options: commonChartOptions
+        });
+    </script>
+</body>
+</html>
+
+
